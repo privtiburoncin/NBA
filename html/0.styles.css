@@ -1,0 +1,190 @@
+/* General */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #17408b; /* Azul NBA */
+    color: white;
+    padding: 1em;
+    text-align: center;
+}
+
+header .logo img {
+    width: 80px; /* Tamaño consistente */
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li {
+    display: inline;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+header nav ul li a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 2em;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+main h1 {
+    text-align: center;
+    color: #17408b; /* Azul NBA */
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+/* Productos */
+.productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adaptable según el tamaño */
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.producto {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s;
+}
+
+.producto:hover {
+    transform: scale(1.05); /* Efecto al pasar el cursor */
+}
+
+.producto img {
+    width: 100%;
+    height: 250px; /* Tamaño uniforme */
+    object-fit: contain; /* Mantener proporciones sin recortar */
+    margin-bottom: 10px;
+}
+
+.producto h3 {
+    font-size: 1.2em;
+    color: #17408b; /* Azul NBA */
+    margin-bottom: 10px;
+}
+
+.producto p {
+    font-size: 0.9em;
+    color: #666;
+    margin: 5px 0;
+}
+
+.producto button {
+    background-color: #17408b; /* Azul NBA */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.producto button:hover {
+    background-color: #ff0000; /* Rojo NBA */
+}
+
+/* Carrito */
+.carrito-container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border: 3px solid #17408b;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.carrito-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.carrito-tabla th, .carrito-tabla td {
+    border: 1px solid #ddd;
+    text-align: center;
+    padding: 15px;
+    font-size: 1em;
+}
+
+.carrito-tabla th {
+    background-color: #17408b; /* Azul NBA */
+    color: white;
+    font-size: 1.1em;
+}
+
+.carrito-tabla img {
+    max-width: 100px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.carrito-total {
+    text-align: right;
+    font-size: 1.3em;
+    color: #333;
+    margin-top: 20px;
+}
+
+/* Botones */
+button {
+    background-color: #17408b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: all 0.3s;
+}
+
+button:hover {
+    background-color: #ff0000;
+    transform: scale(1.1); /* Efecto de zoom al pasar el cursor */
+}
+
+/* Footer */
+footer {
+    background-color: #17408b;
+    color: white;
+    text-align: center;
+    padding: 1em;
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+footer p {
+    margin: 0;
+}
