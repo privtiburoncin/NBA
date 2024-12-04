@@ -74,60 +74,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['producto_id'], $_POST
     <nav>
         <ul>
             <li><a href="index.php">Inicio</a></li>
-            <li><a href="#productos">Productos</a></li>
             <li><a href="1.carrito.php">Carrito</a></li>
             <?php if (isset($_SESSION['usuario_id'])): ?>
                 <li><a href="6.logout.php">Cerrar Sesión (<?php echo isset($_SESSION['usuario_nombre']) ? htmlspecialchars($_SESSION['usuario_nombre']) : 'Usuario'; ?>)</a></li>
             <?php else: ?>
                 <li><a href="5.login.php">Iniciar Sesión</a></li>
-                <li><a href="8.registro.php">Registrarse</a></li>
             <?php endif; ?>
         </ul>
     </nav>
 </header>
-    <main>
-        <section id="productos">
-            <h1>Productos NBA</h1>
-            <form method="GET" action="index.php" class="filtros">
-                <select name="categoria">
-                    <option value="">Todas las Categorías</option>
-                    <?php foreach ($categorias as $categoria): ?>
-                        <option value="<?php echo htmlspecialchars($categoria['categoria']); ?>" <?php echo ($categoria_seleccionada === $categoria['categoria']) ? 'selected' : ''; ?>>
-                            <?php echo htmlspecialchars($categoria['categoria']); ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-                <input type="text" name="buscar" placeholder="Buscar productos..." value="<?php echo htmlspecialchars($termino_busqueda); ?>">
-                <button type="submit">Buscar</button>
-            </form>
-            <div class="productos">
-                <?php if (!empty($productos)): ?>
-                    <?php foreach ($productos as $producto): ?>
-                        <div class="producto">
-                            <img src="Imagenes_Imagen/<?php echo htmlspecialchars($producto['imagen_url']); ?>" alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
-                            <h3><?php echo htmlspecialchars($producto['nombre']); ?></h3>
-                            <p><?php echo htmlspecialchars($producto['descripcion']); ?></p>
-                            <p>Precio: $<?php echo htmlspecialchars($producto['precio']); ?></p>
-                            <?php if (isset($_SESSION['usuario_id'])): ?>
-                                <form method="POST" action="index.php">
-                                    <input type="hidden" name="producto_id" value="<?php echo $producto['id']; ?>">
-                                    <label for="cantidad_<?php echo $producto['id']; ?>">Cantidad:</label>
-                                    <input type="number" id="cantidad_<?php echo $producto['id']; ?>" name="cantidad" value="1" min="1">
-                                    <button type="submit">Añadir al Carrito</button>
-                                </form>
-                            <?php else: ?>
-                                <p><a href="5.login.php">Inicie sesión para añadir al carrito.</a></p>
-                            <?php endif; ?>
-                        </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p>No se encontraron productos.</p>
-                <?php endif; ?>
-            </div>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 Tienda Oficial NBA - Todos los derechos reservados</p>
-    </footer>
+<main>
+    <section id="productos">
+        <h1>Productos NBA</h1>
+        <form method="GET" action="index.php" class="filtros">
+            <select name="categoria">
+                <option value="">Todas las Categorías</option>
+                <?php foreach ($categorias as $categoria): ?>
+                    <option value="<?php echo htmlspecialchars($categoria['categoria']); ?>" <?php echo ($categoria_seleccionada === $categoria['categoria']) ? 'selected' : ''; ?>>
+                        <?php echo htmlspecialchars($categoria['categoria']); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            <input type="text" name="buscar" placeholder="Buscar productos..." value="<?php echo htmlspecialchars($termino_busqueda); ?>">
+            <button type="submit">Buscar</button>
+        </form>
+        <div class="productos">
+            <?php if (!empty($productos)): ?>
+                <?php foreach ($productos as $producto): ?>
+                    <div class="producto">
+                        <img src="Imagenes_Imagen/<?php echo htmlspecialchars($producto['imagen_url']); ?>" alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
+                        <h3><?php echo htmlspecialchars($producto['nombre']); ?></h3>
+                        <p><?php echo htmlspecialchars($producto['descripcion']); ?></p>
+                        <p>Precio: $<?php echo htmlspecialchars($producto['precio']); ?></p>
+                        <?php if (isset($_SESSION['usuario_id'])): ?>
+                            <form method="POST" action="index.php">
+                                <input type="hidden" name="producto_id" value="<?php echo $producto['id']; ?>">
+                                <label for="cantidad_<?php echo $producto['id']; ?>">Cantidad:</label>
+                                <input type="number" id="cantidad_<?php echo $producto['id']; ?>" name="cantidad" value="1" min="1">
+                                <button type="submit">Añadir al Carrito</button>
+                            </form>
+                        <?php else: ?>
+                            <p><a href="5.login.php">Inicie sesión para añadir al carrito.</a></p>
+                        <?php endif; ?>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>No se encontraron productos.</p>
+            <?php endif; ?>
+        </div>
+    </section>
+</main>
+<footer>
+    <p>&copy; 2024 Tienda Oficial NBA - Todos los derechos reservados</p>
+</footer>
 </body>
 </html>

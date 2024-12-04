@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit">Iniciar Sesión</button>
     </form>
     <a href="10.recuperacion.php">¿Olvidaste tu contraseña?</a>
-
+    <br>
+    <a href="8.registro.php"><button>Regístrate</button></a>
 </body>
 </html>
-
