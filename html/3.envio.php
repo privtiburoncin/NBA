@@ -46,7 +46,7 @@ try {
                         <th>Imagen</th>
                         <th>Producto</th>
                         <th>Cantidad</th>
-                        <th>Talla</th>
+                        
                         <th>Subtotal</th>
                     </tr>
                 </thead>
@@ -56,7 +56,7 @@ try {
                             <td><img src="Imagenes_Imagen/<?php echo htmlspecialchars($detalle['imagen_url']); ?>" alt="<?php echo htmlspecialchars($detalle['nombre']); ?>" width="100"></td>
                             <td><?php echo htmlspecialchars($detalle['nombre']); ?></td>
                             <td><?php echo htmlspecialchars($detalle['cantidad']); ?></td>
-                            <td><?php echo htmlspecialchars($detalle['talla']); ?></td>
+                            
                             <td>$<?php echo htmlspecialchars($detalle['subtotal']); ?></td>
                         </tr>
                     <?php endforeach; ?>
