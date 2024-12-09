@@ -11,7 +11,7 @@ $usuario_id = $_SESSION['usuario_id'];
 
 // Obtener los productos del carrito desde la base de datos
 try {
-    $stmt = $conn->prepare("SELECT c.cantidad, c.talla, p.* 
+    $stmt = $conn->prepare("SELECT c.cantidad, p.* 
                             FROM carrito c 
                             JOIN productos p ON c.producto_id = p.id 
                             WHERE c.usuario_id = ?");
