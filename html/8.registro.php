@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $apellido = $_POST['apellido'];
     $telefono = $_POST['telefono'];
     $correo = $_POST['correo'];
-    $contrasena = password_hash($_POST['contrasena'], PASSWORD_BCRYPT); // Cifrar contraseña
+    $contrasena = $_POST['contrasena']; // Sin cifrar
 
     try {
         // Verificar si la cédula ya existe
@@ -54,4 +54,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 </body>
 </html>
+
 

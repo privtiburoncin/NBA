@@ -3,7 +3,7 @@ require '2.conexion.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cedula = $_POST['cedula'];
-    $nueva_contrasena = password_hash($_POST['nueva_contrasena'], PASSWORD_BCRYPT);
+    $nueva_contrasena = $_POST['nueva_contrasena']; // Sin cifrar
 
     try {
         // Verificar si la cédula existe
