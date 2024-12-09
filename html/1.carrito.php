@@ -74,11 +74,19 @@ $total_con_envio = $total + $precio_envio;
                             <td><img src="Imagenes_Imagen/<?php echo htmlspecialchars($item['imagen_url']); ?>" width="100"></td>
                             <td><?php echo htmlspecialchars($item['nombre']); ?></td>
                             <td>
-                                <select name="talla">
-                                    <option value="S">S</option>
-                                    <option value="M">M</option>
-                                    <option value="L">L</option>
-                                    <option value="XL">XL</option>
+                                <select name="talla" class="carrito-talla">
+                                    <?php
+                                    // Seleccionar el rango de tallas dependiendo del producto
+                                    if (stripos($item['nombre'], 'zapatilla') !== false) {
+                                        // Si es zapatilla, elegir el rango correspondiente
+                                        $tallas = range(6.5, 12, 0.5); // Rango de 6.5 a 12 con saltos de 0.5
+                                    } else {
+                                        $tallas = range(32.5, 44, 0.5); // Rango de 32.5 a 44 con saltos de 0.5
+                                    }
+                                    foreach ($tallas as $talla) {
+                                        echo "<option value='$talla'>$talla</option>";
+                                    }
+                                    ?>
                                 </select>
                             </td>
                             <td><?php echo htmlspecialchars($item['cantidad']); ?></td>
@@ -87,7 +95,7 @@ $total_con_envio = $total + $precio_envio;
                             <td>
                                 <form method="POST">
                                     <input type="hidden" name="producto_id" value="<?php echo $item['id']; ?>">
-                                    <button type="submit" name="eliminar_producto">Eliminar</button>
+                                    <button type="submit" name="eliminar_producto" class="btn-eliminar">Eliminar</button>
                                 </form>
                             </td>
                         </tr>
@@ -98,9 +106,14 @@ $total_con_envio = $total + $precio_envio;
                 <p>Precio de Envío: $<?php echo $precio_envio; ?></p>
                 <p><strong>Total con Envío: $<?php echo $total_con_envio; ?></strong></p>
             </div>
+            <form method="POST" action="3.envio.php">
+                <input type="hidden" name="total_con_envio" value="<?php echo $total_con_envio; ?>">
+                <button type="submit" class="btn-finalizar">Pasar a la Siguiente Página</button>
+            </form>
         <?php else: ?>
             <p>Tu carrito está vacío.</p>
         <?php endif; ?>
     </div>
 </body>
 </html>
+
