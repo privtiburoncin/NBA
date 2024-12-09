@@ -113,6 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar_compra'])) 
                             <th>Imagen</th>
                             <th>Producto</th>
                             <th>Cantidad</th>
+                            <th>Talla</th>
                             <th>Precio</th>
                             <th>Subtotal</th>
                         </tr>
@@ -123,6 +124,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar_compra'])) 
                                 <td><img src="Imagenes_Imagen/<?php echo htmlspecialchars($item['imagen_url']); ?>" alt="<?php echo htmlspecialchars($item['nombre']); ?>" width="100"></td>
                                 <td><?php echo htmlspecialchars($item['nombre']); ?></td>
                                 <td><?php echo htmlspecialchars($item['cantidad']); ?></td>
+                                <td>
+                                <!-- Selector de talla -->
+                                <select name="talla" class="carrito-talla">
+                                    <?php
+                                    if (stripos($item['nombre'], 'zapatilla') !== false) {
+                                        // Solo mostrar talla 8.5 para zapatillas
+                                        echo '<option value="8.5">8.5</option>';
+                                        echo '<option value="no-disponible">No disponible</option>';
+                                    } elseif (preg_match('/sueter|short|jersey|camiseta|media/i', $item['nombre'])) {
+                                        // Tallas para otros productos
+                                        $tallas = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+                                        foreach ($tallas as $talla) {
+                                            echo "<option value='$talla'>$talla</option>";
+                                        }
+                                    } else {
+                                        echo "<option value='no-disponible'>No disponible</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </td>
                                 <td>$<?php echo htmlspecialchars($item['precio']); ?></td>
                                 <td>$<?php echo htmlspecialchars($item['precio'] * $item['cantidad']); ?></td>
                             </tr>
