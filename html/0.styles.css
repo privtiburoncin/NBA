@@ -12,6 +12,7 @@ header {
     color: white;
     padding: 1em;
     text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 header .logo img {
@@ -36,6 +37,7 @@ header nav ul li a {
 
 header nav ul li a:hover {
     text-decoration: underline;
+    color: #ffcc00; /* Color amarillo al pasar el mouse */
 }
 
 main {
@@ -47,8 +49,9 @@ main {
 main h1 {
     text-align: center;
     color: #17408b; /* Azul NBA */
-    font-size: 2em;
+    font-size: 2.5em;
     margin-bottom: 20px;
+    text-transform: uppercase;
 }
 
 /* Productos */
@@ -65,11 +68,12 @@ main h1 {
     text-align: center;
     padding: 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .producto:hover {
     transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .producto img {
@@ -77,25 +81,36 @@ main h1 {
     height: 250px;
     object-fit: contain;
     margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
 }
 
 .producto h3 {
-    font-size: 1.2em;
+    font-size: 1.5em;
     color: #17408b;
+    margin-bottom: 10px;
+}
+
+.producto p {
+    font-size: 1em;
+    color: #666;
+    margin: 10px 0;
 }
 
 .producto button {
     background-color: #17408b;
     color: white;
     border: none;
-    padding: 10px 15px;
+    padding: 10px 20px;
     border-radius: 5px;
     font-size: 1em;
-    transition: background-color 0.3s;
+    cursor: pointer;
+    transition: all 0.3s;
 }
 
 .producto button:hover {
     background-color: #ff0000;
+    transform: scale(1.1);
 }
 
 /* Carrito */
@@ -119,17 +134,36 @@ main h1 {
     border: 1px solid #ddd;
     text-align: center;
     padding: 15px;
+    font-size: 1em;
 }
 
 .carrito-tabla th {
-    background-color: #17408b;
+    background-color: #17408b; /* Azul NBA */
     color: white;
+    font-size: 1.2em;
+}
+
+.carrito-tabla img {
+    max-width: 100px;
+    height: auto;
+    border-radius: 5px;
+    border: 1px solid #ddd;
 }
 
 .carrito-total {
     text-align: right;
     font-size: 1.3em;
     color: #333;
+    margin-top: 20px;
+}
+
+.carrito-talla, .carrito-genero {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 100%;
+    text-align: center;
 }
 
 /* Botones */
@@ -140,6 +174,7 @@ button {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 1.1em;
     transition: transform 0.3s, background-color 0.3s;
 }
 
@@ -148,10 +183,35 @@ button:hover {
     transform: scale(1.1);
 }
 
-.carrito-talla select {
-    padding: 5px;
-    border: 1px solid #ddd;
+.btn-eliminar {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    padding: 10px 15px;
     border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.btn-eliminar:hover {
+    background-color: #cc0000;
+}
+
+.btn-finalizar {
+    background-color: #17408b;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 1.2em;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-finalizar:hover {
+    background-color: #00b300;
+    transform: scale(1.1);
 }
 
 /* Footer */
@@ -160,4 +220,11 @@ footer {
     color: white;
     text-align: center;
     padding: 1em;
+    margin-top: 20px;
+    font-size: 0.9em;
+    border-top: 3px solid #ffcc00; /* Línea decorativa */
+}
+
+footer p {
+    margin: 0;
 }

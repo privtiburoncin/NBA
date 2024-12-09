@@ -29,6 +29,19 @@ foreach ($carrito as $item) {
 }
 $total_con_envio = $total + $precio_envio;
 
+// Eliminar producto del carrito
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_producto'])) {
+    try {
+        $producto_id = $_POST['producto_id'];
+        $stmt = $conn->prepare("DELETE FROM carrito WHERE usuario_id = ? AND producto_id = ?");
+        $stmt->execute([$usuario_id, $producto_id]);
+        header("Location: 1.carrito.php");
+        exit();
+    } catch (PDOException $e) {
+        die("Error al eliminar producto: " . $e->getMessage());
+    }
+}
+
 // Manejar el envío y pago después de la compra
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar_compra'])) {
     try {
@@ -56,40 +69,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar_compra'])) 
         $_SESSION['ultimo_pedido_id'] = $pedido_id;
         $_SESSION['total_con_envio'] = $total_con_envio;
 
-        // Mostrar formulario para detalles de envío y pago
-        $mostrar_formulario = true;
-
-    } catch (PDOException $e) {
-        die("Error al finalizar compra: " . $e->getMessage());
-    }
-} elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['guardar_envio_pago'])) {
-    // Guardar datos de envío y pago en la base de datos
-    $direccion = $_POST['direccion'];
-    $ciudad = $_POST['ciudad'];
-    $codigo_postal = $_POST['codigo_postal'];
-    $telefono = $_POST['telefono'];
-    $numero_tarjeta = $_POST['numero_tarjeta'];
-    $nombre_titular = $_POST['nombre_titular'];
-    $fecha_expiracion = $_POST['fecha_expiracion'];
-    $codigo_seguridad = $_POST['codigo_seguridad'];
-
-    try {
-        // Insertar datos de envío
-        $stmt = $conn->prepare("INSERT INTO envios (pedido_id, direccion, ciudad, codigo_postal, telefono) VALUES (?, ?, ?, ?, ?)");
-        $stmt->execute([$_SESSION['ultimo_pedido_id'], $direccion, $ciudad, $codigo_postal, $telefono]);
-
-        // Insertar datos de pago
-        $stmt = $conn->prepare("INSERT INTO tarjetas_credito (pedido_id, numero_tarjeta, nombre_titular, fecha_expiracion, codigo_seguridad) 
-                                VALUES (?, ?, ?, ?, ?)");
-        $stmt->execute([$_SESSION['ultimo_pedido_id'], $numero_tarjeta, $nombre_titular, $fecha_expiracion, $codigo_seguridad]);
-
-        // Redirigir a una página de confirmación
-        echo "<script>alert('Compra finalizada con éxito.');</script>";
-        header("Location: 9.confirmacion.php");
+        header("Location: 3.envio.php");
         exit();
 
     } catch (PDOException $e) {
-        die("Error al guardar los detalles de envío y pago: " . $e->getMessage());
+        die("Error al finalizar compra: " . $e->getMessage());
     }
 }
 ?>
@@ -100,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar_compra'])) 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrito de Compras</title>
-    <link rel="stylesheet" href="\html\0.styles.css">
+    <link rel="stylesheet" href="0.styles.css">
 </head>
 <body>
     <h1>Carrito de Compras</h1>
@@ -169,8 +153,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar_compra'])) 
                 <p>Precio de Envío: $<?php echo $precio_envio; ?></p>
                 <p><strong>Total con Envío: $<?php echo $total_con_envio; ?></strong></p>
             </div>
-            <form method="POST" action="detalles_envio.php">
-                <input type="hidden" name="total_con_envio" value="<?php echo $total_con_envio; ?>">
+            <form method="POST" action="3.envio.php">
+                <input type="hidden" name="finalizar_compra" value="1">
                 <button type="submit" class="btn-finalizar">Pasar a la Siguiente Página</button>
             </form>
         <?php else: ?>
@@ -179,4 +163,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar_compra'])) 
     </div>
 </body>
 </html>
-
