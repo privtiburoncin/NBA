@@ -43,9 +43,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar_compra'])) 
 
         // Insertar detalles del pedido
         foreach ($carrito as $item) {
-            $stmt = $conn->prepare("INSERT INTO detalles_pedido (pedido_id, producto_id, cantidad, talla, subtotal) VALUES (?, ?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO detalles_pedido (pedido_id, producto_id, cantidad, subtotal) VALUES (?, ?, ?, ?, ?)");
             $subtotal = $item['precio'] * $item['cantidad'];
-            $stmt->execute([$pedido_id, $item['id'], $item['cantidad'], $item['talla'], $subtotal]);
+            $stmt->execute([$pedido_id, $item['id'], $item['cantidad'], $subtotal]);
         }
 
         // Vaciar el carrito
@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar_compra'])) 
                     <tr>
                         <th>Imagen</th>
                         <th>Producto</th>
-                        <th>Talla</th>
+                        
                         <th>Cantidad</th>
                         <th>Precio</th>
                         <th>Subtotal</th>
@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar_compra'])) 
                         <tr>
                             <td><img src="Imagenes_Imagen/<?php echo htmlspecialchars($item['imagen_url']); ?>" alt="<?php echo htmlspecialchars($item['nombre']); ?>" width="100"></td>
                             <td><?php echo htmlspecialchars($item['nombre']); ?></td>
-                            <td><?php echo htmlspecialchars($item['talla']); ?></td>
+                            
                             <td><?php echo htmlspecialchars($item['cantidad']); ?></td>
                             <td>$<?php echo htmlspecialchars($item['precio']); ?></td>
                             <td>$<?php echo htmlspecialchars($item['precio'] * $item['cantidad']); ?></td>
