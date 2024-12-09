@@ -116,25 +116,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar_compra'])) 
                                 </select>
                             </td>
                             <td>
-                                <!-- Selector de talla -->
-                                <select name="talla" class="carrito-talla">
-                                    <?php
-                                    // Determinar tipo de producto y mostrar tallas adecuadas
-                                    if (stripos($item['nombre'], 'zapatilla') !== false) {
-                                        // Tallas para zapatillas
-                                        $tallas = range(6.5, 11, 0.5);
-                                    } elseif (preg_match('/gorra|media|jersey|camiseta|sueter|short|shorts/i', $item['nombre'])) {
-                                        // Tallas para otras prendas
-                                        $tallas = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
-                                    } else {
-                                        $tallas = []; // Si no hay categoría específica
-                                    }
-                                    foreach ($tallas as $talla) {
-                                        echo "<option value='$talla'>$talla</option>";
-                                    }
-                                    ?>
-                                </select>
-                            </td>
+    <!-- Selector de talla -->
+    <select name="talla_<?php echo $item['id']; ?>" class="carrito-talla">
+        <?php
+        // Determinar tipo de producto y mostrar tallas adecuadas
+        if (stripos($item['nombre'], 'zapatilla') !== false) {
+            // Tallas para zapatillas (6.5 a 11 en incrementos de 0.5)
+            $tallas = range(6.5, 11, 0.5);
+        } elseif (preg_match('/gorra|media|jersey|camiseta|sueter|short|shorts/i', $item['nombre'])) {
+            // Tallas para otras prendas
+            $tallas = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+        } else {
+            $tallas = []; // Si no hay categoría específica
+        }
+
+        // Generar las opciones del selector
+        foreach ($tallas as $talla) {
+            echo "<option value='$talla'>$talla</option>";
+        }
+        ?>
+    </select>
+</td>
                             <td><?php echo htmlspecialchars($item['cantidad']); ?></td>
                             <td>$<?php echo htmlspecialchars($item['precio']); ?></td>
                             <td>$<?php echo htmlspecialchars($item['precio'] * $item['cantidad']); ?></td>
